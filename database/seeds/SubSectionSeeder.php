@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class SubSectionSeeder extends Seeder
 {
@@ -13,18 +14,38 @@ class SubSectionSeeder extends Seeder
     public function run()
     {
         DB::table('subsections')->truncate();
-        App\Section::all()->each(function($s){
-            $count = $s->count;
-            $subsections = factory(App\Subsection::class, (int)$count)->states('header', 'footer')->make([
+        Storage::disk('private')->deleteDirectory('videos');
+        Storage::disk('private')->makeDirectory('videos');
+
+        Storage::disk('private')->deleteDirectory('pictures');
+        Storage::disk('private')->makeDirectory('pictures');
+        Storage::disk('private')->makeDirectory('pictures/thumbnails');
+
+        App\Section::take(2)->get()->each(function($s){
+            $subsections = factory(App\Subsection::class, (int)$s->count)->states('header', 'footer')->make([
                 'section_id' => $s->id
             ]);
             
             $subsections->each(function($ss, $k) {
-                $ss->slot = ($k);
-                $video = factory(App\Video::class)->states('file', 'youtube')->create();
-                $video->subsections()->save($ss);
+                $ss->slot = $k;
+                $subsectionable = $this->subsectionable();
+                $subsectionable->save();
+                $subsectionable->subsections()->save($ss);
             });
             $s->subsections()->saveMany($subsections);
         });
+    }
+    public function subsectionable()
+    {
+        $subsectionablearray=['Video', 'Image'];
+        $randomelement = array_random($subsectionablearray);
+        if ($randomelement == 'Video') {
+            return factory(App\Video::class)->states('file', 'youtube')->make(); 
+        } else if ($randomelement == 'Image') {
+            return factory(App\Image::class)->make([
+                'user_id'=> App\User::inRandomOrder()->first()->id
+            ]);
+        }
+        
     }
 }

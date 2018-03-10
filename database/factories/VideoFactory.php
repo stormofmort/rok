@@ -12,7 +12,7 @@ $factory->define(App\Video::class, function (Faker $faker) {
 $factory->state(App\Video::class, 'file', function($faker) {
     //$image = $faker->image(storage_path() . "/pictures/", 1280, 960, 'nature', false);
     return [
-        'file' => $faker->file($sourceDir = "C:/Users/mohamed.latheef/Videos", $targetDir = storage_path() . "/videos/", false),
+        'file' => $faker->file($sourceDir = "C:/Users/" . env('USERDIR', 'mohamed.latheef') . "/Videos/Viber", $targetDir = storage_path() . "/videos/", false),
     ];
 });
 

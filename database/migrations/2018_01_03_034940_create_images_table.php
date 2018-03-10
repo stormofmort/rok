@@ -22,14 +22,6 @@ class CreateImagesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Schema::create('imageables', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('image_id');
-            $table->integer('imageable_id');
-            $table->string('imageable_type');
-            $table->timestamps();
-        });
     }
 
     /**

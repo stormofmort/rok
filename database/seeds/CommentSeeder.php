@@ -14,7 +14,7 @@ class CommentSeeder extends Seeder
     {
         DB::table('comments')->truncate();
 
-        App\Article::all()->each(function($a){
+        App\Article::take(5)->get()->each(function($a){
             $a->comments()->saveMany(factory(App\Comment::class, 4)->make([
                 'user_id'=> App\User::inRandomOrder()->first()->id,
             ]));
@@ -25,7 +25,7 @@ class CommentSeeder extends Seeder
             });
         });
 
-        App\Image::all()->each(function($i){
+        App\Image::take(3)->get()->each(function($i){
             $i->comments()->saveMany(factory(App\Comment::class, 4)->make([
                 'user_id'=> App\User::inRandomOrder()->first()->id,
             ]));

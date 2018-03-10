@@ -13,7 +13,7 @@ class SectionSeeder extends Seeder
     public function run()
     {
         DB::table('sections')->truncate();
-        App\Article::all()->each(function($a) {
+        App\Article::take(3)->get()->each(function($a) {
             $sections = factory(App\Section::class,4)->states('single', 'double_equal', 'double_left', 'double_right', 'triple_equal','triple_left', 'triple_right', 'triple_unequal', 'four')->make();   
             $sections->each(function($s, $k) {
                 $s->slot = ($k);

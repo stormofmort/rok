@@ -13,22 +13,22 @@ class VoteSeeder extends Seeder
     public function run()
     {
         DB::table('votes')->truncate();
-        App\Article::where('status', true)->get()->each(function($a) {
-            $a->votes()->saveMany(factory(App\Vote::class, 6)->make([
+        App\Article::where('status', true)->take(3)->get()->each(function($a) {
+            $a->votes()->saveMany(factory(App\Vote::class, 3)->make([
                 'user_id'=> App\User::inRandomOrder()->first()->id,
             ]));
         });
-        App\User::all()->each(function($u) {
+        App\User::take(3)->get()->each(function($u) {
             $u->votes()->saveMany(factory(App\Vote::class, 6)->make([
                 'user_id'=> App\User::inRandomOrder()->first()->id,
             ]));
         });
-        App\Comment::all()->each(function($c) {
+        App\Comment::take(3)->get()->each(function($c) {
             $c->votes()->saveMany(factory(App\Vote::class, 6)->make([
                 'user_id'=> App\User::inRandomOrder()->first()->id,
             ]));
         });
-        App\Image::all()->each(function($i) {
+        App\Image::take(3)->get()->each(function($i) {
             $i->votes()->saveMany(factory(App\Vote::class, 6)->make([
                 'user_id'=> App\User::inRandomOrder()->first()->id,
             ]));

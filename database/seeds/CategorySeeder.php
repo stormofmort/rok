@@ -15,13 +15,13 @@ class CategorySeeder extends Seeder
         DB::table('categories')->truncate();
         DB::table('article_category')->truncate();
 
-        App\Article::all()->each(function($a) {
+        App\Article::take(3)->get()->each(function($a) {
             $a->categories()->saveMany(factory(App\Category::class,1)->make([
                 'user_id'=> $a->user()->first()->id
             ]));
         });
 
-        App\Category::all()->each(function($c){
+        App\Category::take(3)->get()->each(function($c){
             $c->children()->saveMany(factory(App\Category::class,1)->make([
                 'user_id'=> $c->user()->first()->id
             ]));

@@ -16,11 +16,6 @@ class Image extends Model
         return 'slug';
     }
 
-    public function articles()
-    {
-        return $this->morphedByMany('App\Article', 'imageable');
-    }
-
     public function tags()
     {
         return $this->morphToMany('App\Tag', 'taggable');

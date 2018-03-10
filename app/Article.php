@@ -31,11 +31,6 @@ class Article extends Model
         return $this->belongsToMany('App\Category');
     }
 
-    public function images()
-    {
-        return $this->morphToMany('App\Image', 'imageable');
-    }
-
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');
