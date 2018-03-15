@@ -17,6 +17,8 @@ class CreateVideosTable extends Migration
             $table->increments('id');
             $table->string('file')->nullable();
             $table->string('url')->nullable();
+            $table->string('slug');
+            $table->integer('user_id');
             $table->softDeletes();
             $table->timestamps();
         });
