@@ -7,3 +7,9 @@ $factory->define(App\Audio::class, function (Faker $faker) {
         //
     ];
 });
+
+$factory->state(App\Video::class, 'file', function($faker) {
+    return [
+        'file' => $faker->file($sourceDir = "C:/Users/" . env('USERDIR', 'mohamed.latheef') . "/Music", $targetDir = storage_path() . "/audios/", false),
+    ];
+});

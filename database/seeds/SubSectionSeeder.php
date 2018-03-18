@@ -21,6 +21,9 @@ class SubSectionSeeder extends Seeder
         Storage::disk('private')->makeDirectory('pictures');
         Storage::disk('private')->makeDirectory('pictures/thumbnails');
 
+        Storage::disk('private')->deleteDirectory('audios');
+        Storage::disk('private')->makeDirectory('audios');
+
         App\Section::take(2)->get()->each(function($s){
             $subsections = factory(App\Subsection::class, (int)$s->count)->states('header', 'footer')->make([
                 'section_id' => $s->id
@@ -37,7 +40,7 @@ class SubSectionSeeder extends Seeder
     }
     public function subsectionable()
     {
-        $subsectionablearray=['Video', 'Image'];
+        $subsectionablearray=['Video', 'Image', 'Paragraph'];
         $randomelement = array_random($subsectionablearray);
         if ($randomelement == 'Video') {
             return factory(App\Video::class)->states('file', 'youtube')->make(); 
@@ -45,7 +48,10 @@ class SubSectionSeeder extends Seeder
             return factory(App\Image::class)->make([
                 'user_id'=> App\User::inRandomOrder()->first()->id
             ]);
+        } else if ($randomelement == 'Paragraph') {
+            return factory(App\Paragraph::class)->make([
+                'user_id'=> App\User::inRandomOrder()->first()->id
+            ]);
         }
-        
     }
 }

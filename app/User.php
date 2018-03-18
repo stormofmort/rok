@@ -47,6 +47,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Image');
     }
 
+    public function videos()
+    {
+        return $this->hasMany('App\Video');
+    }
+
+    public function paragraphs()
+    {
+        return $this->hasMany('App\Paragraph');
+    }
+
     public function comments()
     {
         return $this->hasMany('App\Comments');
