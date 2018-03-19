@@ -17,4 +17,19 @@ class Poll extends Model
     {
         return $this->morphMany('App\Vote', 'votable');
     }
+
+    public function subsections()
+    {
+        return $this->morphMany('App\Subsection', 'subsectionable');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

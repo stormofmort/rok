@@ -18,4 +18,14 @@ class Quote extends Model
     {
         return $this->morphMany('App\Vote', 'votable');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function author() 
+    {
+        return $this->belongsTo('App\Author');
+    }
 }

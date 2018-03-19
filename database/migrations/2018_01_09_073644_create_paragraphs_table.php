@@ -16,6 +16,7 @@ class CreateParagraphsTable extends Migration
         Schema::create('paragraphs', function (Blueprint $table) {
             $table->increments('id');
             $table->text('body');
+            $table->integer('user_id');
             $table->softDeletes();
             $table->timestamps();
         });

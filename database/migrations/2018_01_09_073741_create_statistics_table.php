@@ -17,6 +17,7 @@ class CreateStatisticsTable extends Migration
             $table->increments('id');
             $table->string('caption');
             $table->string('value');
+            $table->integer('user_id');
             $table->softDeletes();
             $table->timestamps();
         });

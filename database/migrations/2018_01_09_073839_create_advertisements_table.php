@@ -15,8 +15,14 @@ class CreateAdvertisementsTable extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('size');
+            $table->string('ad_name');
+            $table->string('ad_client');
+            $table->string('ad_slot');
+            $table->string('ad_layout')->nullable();
+            $table->string('ad_format')->nullable();
+            $table->integer('size_x')->nullable();
+            $table->integer('size_y')->nullable();
+            $table->integer('user_id');
             $table->softDeletes();
             $table->timestamps();
         });

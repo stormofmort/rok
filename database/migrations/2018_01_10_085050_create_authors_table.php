@@ -18,6 +18,7 @@ class CreateAuthorsTable extends Migration
             $table->string('first')->nullable();
             $table->string('middle')->nullable();
             $table->string('last')->nullable();
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
