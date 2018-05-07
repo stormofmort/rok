@@ -12,4 +12,9 @@ class Advertisement extends Model
     {
         return $this->morphMany('App\Subsection', 'subsectionable');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

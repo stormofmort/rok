@@ -66,4 +66,9 @@ class User extends Authenticatable
     {
         return $this->morphMany('App\Vote', 'votable');
     }
+
+    public function advertisements()
+    {
+        return $this->hasMany('App\Advertisement');
+    }
 }

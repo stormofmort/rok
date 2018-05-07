@@ -20,8 +20,10 @@ class CreateAdvertisementsTable extends Migration
             $table->string('ad_slot');
             $table->string('ad_layout')->nullable();
             $table->string('ad_format')->nullable();
-            $table->integer('size_x')->nullable();
-            $table->integer('size_y')->nullable();
+            $table->integer('width')->nullable();
+            $table->integer('height')->nullable();
+            $table->string('display')->nullable();
+            $table->string('text-align')->nullable();
             $table->integer('user_id');
             $table->softDeletes();
             $table->timestamps();
